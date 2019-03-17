@@ -20,7 +20,7 @@ Zuerst musst du dir Dienstenamen ausdenken und SSL-Zertifikat besorgen. Also z.B
 
 * Klone dieses Repo auf deinen Dockerhost nach ``/srv/docker``
   * ``cd /srv/docker``
-  * ``git clone https://github.com/linuxmuster-ext-docker/linuxmuster-osp``
+  * ``git clone https://github.com/linuxmuster-ext-docker/linuxmuster-osp.git``
 * Wechsle in das App-Verzeichnis: ``cd linuxmuster-osp``
 * Passe die Werte in der Datei ``osp.ini`` an.
 * Erzeuge eine Konfiguration mit: ``./setup``
