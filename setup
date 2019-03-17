@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Copying env file in place
+if [ ! -f .env ]; then
+	cp env.dist .env
+fi
+
 # Setting values in .env 
 # Creating nginx configuration
 ansible-playbook ansible-setup.yml
@@ -12,8 +17,9 @@ docker exec -it $CONTAINER_NAME osp-setup
 # Stopping app
 docker-compose down
 
-# FIXME delete broken symlinks in /etc/nginx/sites-enabled/
-
+# delete broken symlinks
+find -L /etc/nginx/sites-enabled/ -type l | xargs rm
+# restart nginx
 /etc/init.d/nginx restart
 
 echo "App configured. You can start your app by executing"
