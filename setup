@@ -12,5 +12,9 @@ docker exec -it $CONTAINER_NAME osp-setup
 # Stopping app
 docker-compose down
 
+# FIXME delete broken symlinks in /etc/nginx/sites-enabled/
+
+/etc/init.d/nginx restart
+
 echo "App configured. You can start your app by executing"
 echo "  docker-compose up -d"
