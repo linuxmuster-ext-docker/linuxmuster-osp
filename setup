@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Setting values in .env 
+# Creating nginx configuration
+ansible-playbook ansible-setup.yml
+# Starting app
+docker-compose up -d
+# Configure app from environment delivered 
+# by .env ans docker-compose.yml
+CONTAINER_NAME=$(grep CONTAINER_NAME .env | awk -F= '{print $2}')
+docker exec -it $CONTAINER_NAME osp-setup
+# Stopping app
+docker-compose down
+
+echo "App configured. You can start your app by executing"
+echo "  docker-compose up -d"

@@ -1,0 +1,24 @@
+[setup]
+# Wie soll der Container der ersten MRBS Instanz heißen?
+containername=openschulportfolio
+# Linuxmuster Version? 62 oder 7x (7x noch nicht implementiert)
+lmnversion=62
+# IP Adresse oder Servername des LDAP Servers
+ldapserver=meinserver.schule.tld
+# Schulname für das MRBS
+schoolname=Meine Schule
+# BaseDN wie auf dem Server in der Datei 
+# /var/lib/linuxmuster/network.settings
+# hinterlegt
+basedn=dc=linuxmuster,dc=lokal
+
+# Wenn der Sercie unter meinhost.meine-domain.tld
+# erreichbar sein soll, hier konfigurieren
+# Servicedomain
+# servicedomain=meine-domain.tld
+servicedomain=meineschule.tld
+# Servicehost
+# servicehost=meinhost
+servicehost=osp
+# Lokaler Port, für die Reverse Prox container Konfiguration
+localport=6789

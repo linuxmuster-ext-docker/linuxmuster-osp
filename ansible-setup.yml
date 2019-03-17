@@ -1,0 +1,54 @@
+- hosts: localhost
+  connection: local
+  gather_facts: no
+
+
+  vars:
+    envsubstvars:
+      CONTAINER_NAME:  "{{ lookup('ini', 'containername section=setup file=osp.ini') }}"
+      LOCAL_PORT:  "{{ lookup('ini', 'localport section=setup file=osp.ini') }}"
+      LDAPSERVER:  "{{ lookup('ini', 'ldapserver section=setup file=osp.ini') }}"
+      SCHOOLNAME:  "{{ lookup('ini', 'schoolname section=setup file=osp.ini') }}"
+      BASEDN:  "{{ lookup('ini', 'basedn section=setup file=osp.ini') }}"
+    envfile: .env
+    # Nginx Variables
+    servicedomain:  "{{ lookup('ini', 'servicedomain section=setup file=osp.ini') }}"
+    servicehost:  "{{ lookup('ini', 'servicehost section=setup file=osp.ini') }}"
+    localport: "{{ lookup('ini', 'localport section=setup file=osp.ini') }}"
+
+
+  tasks:
+
+    - name: Get pwd
+      shell: pwd
+      register: workingdir
+    - set_fact:
+        workingdir={{ workingdir.stdout }}
+
+    - name: Debug
+      debug: var=workingdir
+
+
+    # with predefined vars
+    - name: Substitute .env values from ini
+      lineinfile: dest={{ envfile }}
+                  regexp="^{{ item.key }}"
+                  line="{{ item.key }}={{ item.value }}"
+                  state=present
+      loop: "{{ lookup('dict', envsubstvars) }}"
+
+    - name: Create nginx config
+      template:
+        src: ./nginx/vhost.j2
+        dest: ./nginx/{{ servicehost }}.{{ servicedomain }} 
+
+    - name: Removing old nginx config
+      file:
+        state: absent
+        path: /etc/nginx/sites-enabled/{{ servicehost }}.{{ servicedomain }}
+
+    - name: Removing old nginx config
+      file:
+        src: "{{ workingdir }}/nginx/{{ servicehost  }}.{{ servicedomain }}"
+        dest: /etc/nginx/sites-enabled/{{ servicehost  }}.{{ servicedomain }}
+        state: link
