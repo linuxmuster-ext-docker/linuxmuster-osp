@@ -22,6 +22,7 @@ Zuerst musst du dir Dienstenamen ausdenken und SSL-Zertifikat besorgen. Also z.B
   * ``cd /srv/docker``
   * ``git clone https://github.com/linuxmuster-ext-docker/linuxmuster-osp.git``
 * Wechsle in das App-Verzeichnis: ``cd linuxmuster-osp``
+* Kopiere die Datei ``osp.ini.dist`` nach ``osp.ini``: ``cp osp.ini.dist osp.ini``
 * Passe die Werte in der Datei ``osp.ini`` an.
 * Erzeuge eine Konfiguration mit: ``./setup``
 * Starte die App mit dem Befehl ``docker-compose up -d``
