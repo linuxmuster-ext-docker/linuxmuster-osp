@@ -1,4 +1,4 @@
-# linuxmuster-mrbs
+# linuxmuster-osp
 
 OpenSchulportfolio Docker App für linuxmuster. 
 
@@ -23,7 +23,7 @@ Zuerst musst du dir Dienstenamen ausdenken und SSL-Zertifikat besorgen. Also z.B
   * ``git clone https://github.com/linuxmuster-ext-docker/linuxmuster-osp``
 * Wechsle in das App-Verzeichnis: ``cd linuxmuster-osp``
 * Passe die Werte in der Datei ``osp.ini`` an.
-* Erzeuge eine Konfiguration mit: ``./deploy/bin/turnkey -c mrbs.ini``
+* Erzeuge eine Konfiguration mit: ``./setup``
 * Starte die App mit dem Befehl ``docker-compose up -d``
 
 Jetzt solltest du dich an deinem Schulportfolio unter der Adresse https://osp.meine-schule.tld/ anmelden können, so wie du deinen Service-Host und deine Service-Domain gewählt und konfiguriert hast.
